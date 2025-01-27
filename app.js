@@ -48,7 +48,11 @@ async function login(event) {
       localStorage.setItem('loggedInUser', JSON.stringify(user));
       if(user.role === "admin") return window.location.href = "admin.html"
       if(user.role === "manager") return window.location.href = "manager.html"
-      if(user.role === "employee") return window.location.href = "employee.html"
+
+      if(user.role === "employee") {
+        employeeDetails = document.getElementById('employee-details')
+        console.log(user.id, "user id");
+        return window.location.href = "employee.html"}
     } else {
       showError("Inavalid email or password.")
     }

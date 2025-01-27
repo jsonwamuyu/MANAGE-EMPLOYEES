@@ -4,17 +4,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Employee</title>
+    <style>
+        form input, textarea{
+            padding: 1rem 2rem;
+            background-color: white;
+            border: 2px solid inherit;
+            outline: none;
+        }
+        #login-form{
+            display: flex;
+            flex-direction: column;
+            background-color: blanchedalmond;
+            gap: 1rem;
+        }
+        .logo-img{
+            height: 8rem; width: auto;
+        }
+        .login-container{
+            margin: 0 auto;
+            max-width: 450px;
+        }
+        .error-message{
+            color:var(--error-color);
+            padding-bottom: 0.5rem;
+            font-size: 0.8rem;
+            display: none; /*hidden by default*/
+        }
+    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <h4>Employee</h4>
-    <div>
-        <button id="logout-button">Logout</button>
+    <div class="wrapper">
+        <div class="container" style="padding: 1rem 2rem">
+            <div
+                style="display: flex;flex-direction: row; align-items: center;justify-content: space-between;gap: 4rem;">
+                <h4>Employee</h4>
+                <div>
+                    <button id="logout-button">Logout</button>
+                </div>
+            </div>
+
+
+            
+            <div class="user-details" id="employee-details" style="display: flex;flex-direction: column;gap: 1rem;">
+                <h4>Name: John Doe</h4>
+                <h6>Position: Senior Accountant</h6>
+                <p>Department: Accounts</p>
+                <p>Salary: $3033</p>
+                <p>Email: johndoe@example.com</p>
+            </div>
+
+            <div >
+                <form action="" class="login-form" style="display: flex;flex-direction: column; gap: 1rem; padding: 2rem 0;">
+                    <input type="text" placeholder="Recipient" 
+                    style="width:100%; padding: 10px 15px; outline:none;
+                    background-color: white;border: 2px solid inherit">
+                    <textarea name="" id="4" placeholder="Type your message here." rows="4" style="width:100%; padding: 10px 15px; outline:none;
+                    background-color: white;border: 2px solid inherit"></textarea>
+                    <div style="margin-top:1rem;">
+                        <button class="btn btn-primary">Send a message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+
 
     <script src="app.js"></script>
     <script>
+
+
+document.addEventListener('DOMContentLoaded', () => {
+            const logoutButton = document.getElementById('logout-button');
+            if (logoutButton) {
+                logoutButton.addEventListener('click', logout);
+            }
+
+            // loadEmployeeDetails();
+        });
+
+
+        // async function loadEmployeeDetails(id) => {
+            
+        // }
+
         document.getElementById('logout-button').addEventListener('click', logout)
         function logout() {
             if (confirm("Are you sure you want to logout?")) {
