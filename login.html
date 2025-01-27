@@ -1,0 +1,61 @@
+<!-- File: login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        form input{
+            padding: 1rem 2rem;
+            background-color: white;
+            border: 2px solid inherit;
+            outline: none;
+        }
+        #login-form{
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .logo-img{
+            height: 8rem; width: auto;
+        }
+        .login-container{
+            margin: 0 auto;
+            max-width: 450px;
+        }
+        .error-message{
+            color:var(--error-color);
+            padding-bottom: 0.5rem;
+            font-size: 0.8rem;
+            display: none; /*hidden by default*/
+        }
+    </style>
+
+    <title>Login</title>
+</head>
+<body>
+    <div class="login-container">
+        <h1 style="margin: 2rem;">Login</h1>
+        <div class="error-message" id="error-message"></div>
+        <form id="login-form">
+            <input type="email" id="email" name="email" placeholder="Email Address" >
+
+            <input type="password" id="password" name="password"  placeholder="Password">
+
+            <button type="submit" style="margin-top: 1rem;">Login</button>
+        </form>
+        <div style="display:flex; flex-direction:row; gap:1rem; justify-content:space-between; align-items:center">
+        <p style="font-size: 0.9rem; margin-top: 2rem;"><a href="forgot-password.html">Forgot Password</a></p>
+
+        <p style="font-size: 0.9rem; margin-top: 2rem;">No account? <a href="signup.html">Sign Up</a></p>
+
+        </div>
+
+    </div>
+    <script src="app.js"></script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', login);
+    </script>
+</body>
+</html>

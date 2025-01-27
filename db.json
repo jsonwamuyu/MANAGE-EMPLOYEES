@@ -1,0 +1,66 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Admin User",
+      "email": "admin@example.com",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "password123",
+      "role": "manager"
+    },
+    {
+      "id": "3",
+      "fullname": "johnson wamuyu",
+      "email": "jysonmuchiri@gmail.com",
+      "password": "123456789",
+      "role": "employee"
+    },
+    {
+      "id": "7f06",
+      "email": "cindymuchiri@gmail.com",
+      "password": "1234",
+      "role": "manager"
+    },
+    {
+      "id": "312a",
+      "email": "david.goggins@gmail.com",
+      "password": "1234",
+      "role": "manager"
+    },
+    {
+      "id": "2fae",
+      "email": "mike@gmail.com",
+      "password": "1234",
+      "role": "employee"
+    }
+  ],
+  "employees": [
+    {
+      "name": "John Doe",
+      "department": "Accounts",
+      "position": "Junior level",
+      "salary": 200000,
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "name": "Nancy Leo",
+      "salary": 233333,
+      "department": "Accounts",
+      "position": "Secretary"
+    },
+    {
+      "id": "3",
+      "name": "JOHNSON WAMUYU",
+      "salary": 300000,
+      "department": "ACCOUNTS",
+      "position": "Virtual Assistant"
+    }
+  ]
+}
