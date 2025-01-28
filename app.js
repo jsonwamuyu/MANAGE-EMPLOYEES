@@ -25,6 +25,17 @@ function showError(message) {
   }, 3000);
 }
 
+function showSuccessError(message) {
+  const errorMessage = document.getElementById('success-message');
+  errorMessage.textContent = message;
+  errorMessage.style.display = 'block';
+
+  setTimeout(() => {
+    errorMessage.style.display = 'none';
+  }, 3000);
+}
+
+
 
 // Login Logic
 async function login(event) {

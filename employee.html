@@ -38,6 +38,36 @@
             display: none;
             /*hidden by default*/
         }
+
+
+
+        .employee {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+        }
+
+        @media screen and (min-width:769px) {
+            .employee {
+                grid-template-columns: 1fr 2fr;
+            }
+        }
+
+        .blue-bg {
+            background-color: rgb(95, 95, 245);
+            color: whitesmoke;
+            padding: 0.5rem;
+        }
+
+        .white-bg {
+            background-color: rgb(226, 216, 216);
+            padding: 0.5rem
+        }
+
+        .active {
+            background-color: yellowgreen;
+            color:red;
+        }
     </style>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -46,38 +76,137 @@
     <div class="wrapper">
         <div class="container" style="padding: 1rem 2rem">
             <div
-                style="display: flex;flex-direction: row; align-items: center;justify-content: space-between;gap: 4rem;">
-                <h4>Employee</h4>
+                style="display: flex;flex-direction: row; align-items: center;justify-content: space-between;gap: 4rem; margin-bottom: 2rem;">
+                <h4>Dashboard</h4>
                 <div>
                     <button id="logout-button">Logout</button>
                 </div>
             </div>
 
+            <div class="employee">
+
+                <!-- DETAILS -->
+                <div class="user-details" id="employee-details" style="display: flex;flex-direction: column;gap: 1rem;">
+                    <h5><strong>JOHN DOE</strong></h5>
+                    <p>Position: <strong>Senior Accountant</strong></p>
+                    <p>Department: <strong>Accounts</strong></p>
+                    <p>Salary: <strong>$3033</strong></p>
+                    <p>Email: <strong>johndoe@example.com</strong></p>
+                </div>
 
 
-            <div class="user-details" id="employee-details" style="display: flex;flex-direction: column;gap: 1rem;">
-                <h4>Name: John Doe</h4>
-                <h6>Position: Senior Accountant</h6>
-                <p>Department: Accounts</p>
-                <p>Salary: $3033</p>
-                <p>Email: johndoe@example.com</p>
-            </div>
+                <!-- FORM -->
+                <div>
+                    <h5>Chat</h5>
+                    <form action="" class="login-form"
+                        style="display: flex;flex-direction: column; gap: 1rem; padding: 2rem 0;">
+                        <input type="text" placeholder="Recipient" style="width:100%; padding: 10px 15px; outline:none;
+        background-color: white;border: 2px solid inherit">
+                        <textarea name="" id="4" placeholder="Type your message here." rows="4" style="width:100%; padding: 10px 15px; outline:none;
+        background-color: white;border: 2px solid inherit"></textarea>
+                        <div style="margin-top:1rem;">
+                            <button class="btn btn-primary">Send a message</button>
+                        </div>
+                    </form>
 
-            <div>
-                <form action="" class="login-form"
-                    style="display: flex;flex-direction: column; gap: 1rem; padding: 2rem 0;">
-                    <input type="text" placeholder="Recipient" style="width:100%; padding: 10px 15px; outline:none;
-                    background-color: white;border: 2px solid inherit">
-                    <textarea name="" id="4" placeholder="Type your message here." rows="4" style="width:100%; padding: 10px 15px; outline:none;
-                    background-color: white;border: 2px solid inherit"></textarea>
-                    <div style="margin-top:1rem;">
-                        <button class="btn btn-primary">Send a message</button>
+                    <div class="chat-history" style="display: flex;flex-direction: column;gap: 1rem;">
+                        <h5>Chat History</h5>
+                        <div class="chat">
+                            <h6>Jame</h6>
+                            <p>This is a message to you. Keep it</p>
+                        </div>
+                        <div class="chat">
+                            <h6>Jame</h6>
+                            <p>This is a message to you. Keep it</p>
+                        </div>
                     </div>
-                </form>
+                </div>
+
+
+
             </div>
+
+            <div class="person-selector">
+                <button id="john-selector" class="active">John</button>
+                <button id="jane-selector">Jane</button>
+            </div>
+            <div class="chat-container">
+                <h6 class="chat-header"></h6>
+                <div class="chat-messages">
+                    <div class="message blue-bg">
+                        <h6 class="message-sender">John</h6>
+                        <p class="message-test">Hey Jane</p>
+                        <p class="message-time">10:40 am</p>
+                    </div>
+                    <div class="message blue-white">
+                        <h6 class="message-sender">Jane</h6>
+                        <p class="message-test">Yes my G..Hawayu going.</p>
+                        <p class="message-time">10:40 am</p>
+                    </div>
+                </div>
+                <!-- FORM -->
+                <form action="" class="chat-input-form" style="margin-top: 2rem;">
+                    <input type="text" class="chat-input" placeholder="Type here..."
+                        style="background-color: white;padding: 0.9rem 1rem;">
+                    <button type="submit" class="button send-button" style="margin: 1rem 0">Send</button>
+                </form>
+
+                <button type="button" class="clear-chat-button btn btn-secondary">Clear chat</button>
+            </div>
+
         </div>
     </div>
 
+    <script>
+        const johnSelector = document.querySelector("#john-selector");
+        const janeSelector = document.querySelector('#jane-selector');
+        const chatHeader = document.querySelector(".chat-header");
+        const chatMessages = document.querySelector('.chat-messages');
+        const chatInputForm = document.querySelector(".chat-input-form")
+        const chatInput = document.querySelector('.chat-input');
+        const clearChatBtn = document.querySelector(".clear-chat-button")
+
+        const chatMessageElement = (message) => `
+                    <div class="message ${message.sender === 'John' ? 'blue-bg' : 'white-bg'}">
+                        <h6 class="message-sender">${message.sender}</h6>
+                        <p class="message-test">${message.text}</p>
+                        <p class="message-time">${message.timestamp}</p>
+                    </div>
+        `;
+
+        // To change person sending the message => by default, we know its John
+        let messageSender = "LEAH"
+        const updateMessageSender = (name) => {
+            messageSender = name;
+            chatHeader.innerText = `${messageSender} chatting...`
+            chatInput.placeholder = `Type here ${messageSender}`
+        }
+        janeSelector.onclick = () => updateMessageSender('JANE');
+        johnSelector.onclick = () => updateMessageSender('JOHN')
+
+        if (name === "JOHN") {
+            johnSelector.classList.add("active")
+            janeSelector.classList.remove("active")
+        }
+        if (name === "JANE") {
+            janeSelector.classList.add("active");
+            johnSelector.classList.remove('active');
+        }
+
+        // Send message function
+        const sendMessage = (e) => {
+            e.preventDefault();
+
+            // Get the timestamp
+            const timestamp = new Date().toLocaleString('en-US', { hour: "numeric", minute: "numeric", hour12: true })
+            const message = {
+                sender: messageSender,
+                text: chatInput.value,
+                timestamp
+            }
+        }
+
+    </script>
 
     <script src="app.js"></script>
     <script>

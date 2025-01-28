@@ -5,39 +5,27 @@
       "name": "Admin User",
       "email": "admin@example.com",
       "password": "admin123",
-      "role": "admin"
+      "role": "admin",
+      "resetToken": null,
+      "tokenExpiry": null
     },
     {
       "id": "2",
       "name": "John Doe",
       "email": "john@example.com",
       "password": "password123",
-      "role": "manager"
+      "role": "manager",
+      "resetToken": null,
+      "tokenExpiry": null
     },
     {
       "id": "3",
       "fullname": "johnson wamuyu",
       "email": "jysonmuchiri@gmail.com",
       "password": "123456789",
-      "role": "employee"
-    },
-    {
-      "id": "7f06",
-      "email": "cindymuchiri@gmail.com",
-      "password": "1234",
-      "role": "manager"
-    },
-    {
-      "id": "312a",
-      "email": "david.goggins@gmail.com",
-      "password": "1234",
-      "role": "manager"
-    },
-    {
-      "id": "2fae",
-      "email": "mike@gmail.com",
-      "password": "1234",
-      "role": "employee"
+      "role": "employee",
+      "resetToken": null,
+      "tokenExpiry": null
     }
   ],
   "employees": [

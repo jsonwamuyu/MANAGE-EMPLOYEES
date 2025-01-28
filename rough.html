@@ -39,7 +39,7 @@
         }
     </style>
 
-    <title>Forgot Password</title>
+    <title>Login</title>
 </head>
 
 <body>
@@ -49,30 +49,17 @@
             border-radius: 50%; border: 1px solid var(--primary-color)">
             <ion-icon name="chevron-back" style="color: var(--primary-color);"></ion-icon>
         </a>
-        <h1 style="margin: 1rem 0;">Forgot Password</h1>
-        <p style="margin: 1rem 0;">Enter your Email address to generate a token.
-             Use this token to
-              <a style="color: var(--primary-color)" href="./reset-password.html">reset your password.</a>
+        <h1 style="margin: 1rem 0;">Reset Password</h1>
+        <p style="margin: 1rem 0;">Enter your Email address and we will send you instructions to reset your password.
         </p>
         <div class="error-message" id="error-message"></div>
-        <p id="message"></p>
         <form id="forgot-password-form">
             <input type="email" id="email" name="email" placeholder="Email Address">
             <button type="submit" style="margin-top: 2rem;">Request reset link</button>
         </form>
-
-        
     </div>
     <script src="app.js"></script>
     <script src="forgot-password.js"></script>
-
-
-
-
-
-
-
-
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <!-- <script>
