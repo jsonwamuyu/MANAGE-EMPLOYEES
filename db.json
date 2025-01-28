@@ -1,5 +1,5 @@
 {
-  "users": [
+  "employees": [
     {
       "id": "1",
       "name": "Admin User",
@@ -7,7 +7,10 @@
       "password": "admin123",
       "role": "admin",
       "resetToken": null,
-      "tokenExpiry": null
+      "tokenExpiry": null,
+      "salary": 300000,
+      "department": "ADMINISTRATION",
+      "position": "ADMIN"
     },
     {
       "id": "2",
@@ -16,47 +19,22 @@
       "password": "password123",
       "role": "manager",
       "resetToken": null,
-      "tokenExpiry": null
+      "tokenExpiry": null,
+      "salary": 40000,
+      "department": "ACCOUNTS",
+      "position": "SENIOR MANAGER"
     },
     {
       "id": "3",
-      "fullname": "johnson wamuyu",
+      "name": "johnson wamuyu",
       "email": "jysonmuchiri@gmail.com",
       "password": "123456789",
       "role": "employee",
       "resetToken": null,
-      "tokenExpiry": null
-    }
-  ],
-  "employees": [
-    {
-      "name": "Jane Doe",
-      "department": "Accounts",
-      "position": "Junior level",
-      "salary": 200000,
-      "id": "1"
-    },
-    {
-      "id": "2",
-      "name": "Samwel",
-      "salary": 2000,
-      "department": "ICT",
-      "position": "chairman"
-    },
-    {
-      "id": "3",
-      "name": "JOHNSON WAMUYU",
-      "salary": 300000,
+      "tokenExpiry": null,
+      "salary": 60000,
       "department": "ACCOUNTS",
       "position": "Virtual Assistant"
-    },
-    {
-      "id": "31",
-      "name": "Samwel james",
-      "salary": 200000,
-      "department": "Accounts",
-      "position": "Junior level"
     }
-  ],
-  "messages":[]
+  ]
 }

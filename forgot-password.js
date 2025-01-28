@@ -1,6 +1,6 @@
 const form = document.getElementById('forgot-password-form');
 const message = document.getElementById('message');
-const apiUrl = 'http://localhost:3000/users';
+const apiUrl = 'http://localhost:3000/employees';
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -32,7 +32,7 @@ form.addEventListener('submit', async (e) => {
 
     // Display the token (simulating email sending)
     message.textContent = `Password reset token: ${resetToken} (valid for 1 hour)`;
-    
+
 
   } catch (error) {
     console.error('Error:', error);

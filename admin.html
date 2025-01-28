@@ -112,6 +112,10 @@
             cursor: pointer;
         }
 
+        .product-list{
+            display: grid;
+            grid-template-columns: 1fr;gap: 2rem;
+        }
         .modal form {
             display: flex;
             flex-direction: column;
@@ -261,13 +265,18 @@
                 const li = document.createElement('li');
                 li.innerHTML = `
                     <div style="border: 2px solid #f8f9fa; border-radius: 1rem; padding: 1rem;">
-                        <p><strong>Name:</strong> ${employee.name}</p>
-                        <p><strong>Department:</strong> ${employee.department}</p>
-                        <p><strong>Position:</strong> ${employee.position}</p>
-                        <p><strong>Salary:</strong> $${employee.salary}</p>
-                        <button onclick='openModal(${JSON.stringify(employee)})'>Edit</button>
-                        <button onclick="deleteEmployee(${employee.id})">Delete</button>
-                    </div>
+                        <p><strong>NAME:</strong> ${employee.name}</p>
+                        <p><strong>DEPARTMENT:</strong> ${employee.department}</p>
+                        <p><strong>POSITION:</strong> ${employee.position}</p>
+                        <p><strong>SALARY:</strong> $${employee.salary}</p>
+                        <p><strong>EMAIL:</strong>${employee.email}</p>
+                        <p><strong>ROLE:</strong>${employee.role}</p>
+
+                        <div style="display:flex; flex-direction:row; gap:4rem; justify-content:space-between; aligin-items:center; margin-top:1rem;">    
+                            <button onclick='openModal(${JSON.stringify(employee)})'><ion-icon name="create-outline"></ion-icon></button>
+                            <button onclick="deleteEmployee(${employee.id})"><ion-icon name="trash-outline"></ion-icon></button>
+                        </div>
+                        </div>
                 `;
                 employeeList.appendChild(li);
             });
@@ -355,6 +364,8 @@
 
     </script>
     <script src="app.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>

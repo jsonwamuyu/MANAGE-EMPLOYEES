@@ -1,309 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee</title>
+    <title>Employee Dashboard</title>
     <style>
-        form input,
-        textarea {
-            padding: 1rem 2rem;
-            background-color: white;
-            border: 2px solid inherit;
-            outline: none;
-        }
-
-        #login-form {
-            display: flex;
-            flex-direction: column;
-            background-color: blanchedalmond;
-            gap: 1rem;
-        }
-
-        .logo-img {
-            height: 8rem;
-            width: auto;
-        }
-
-        .login-container {
-            margin: 0 auto;
-            max-width: 450px;
-        }
-
-        .error-message {
-            color: var(--error-color);
-            padding-bottom: 0.5rem;
-            font-size: 0.8rem;
-            display: none;
-            /*hidden by default*/
-        }
-
-
-
-        .employee {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 4rem;
-        }
-
-        @media screen and (min-width:769px) {
-            .employee {
-                grid-template-columns: 1fr 2fr;
-            }
-        }
-
-        .blue-bg {
-            background-color: rgb(95, 95, 245);
-            color: whitesmoke;
-            padding: 0.5rem;
-        }
-
-        .white-bg {
-            background-color: rgb(226, 216, 216);
-            padding: 0.5rem
-        }
-
-        .active {
-            background-color: yellowgreen;
-            color:red;
+        #employee-details {
+            margin: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            width: 50%;
+            font-family: Arial, sans-serif;
         }
     </style>
-    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <div class="wrapper">
-        <div class="container" style="padding: 1rem 2rem">
-            <div
-                style="display: flex;flex-direction: row; align-items: center;justify-content: space-between;gap: 4rem; margin-bottom: 2rem;">
-                <h4>Dashboard</h4>
-                <div>
-                    <button id="logout-button">Logout</button>
-                </div>
-            </div>
-
-            <div class="employee">
-
-                <!-- DETAILS -->
-                <div class="user-details" id="employee-details" style="display: flex;flex-direction: column;gap: 1rem;">
-                    <h5><strong>JOHN DOE</strong></h5>
-                    <p>Position: <strong>Senior Accountant</strong></p>
-                    <p>Department: <strong>Accounts</strong></p>
-                    <p>Salary: <strong>$3033</strong></p>
-                    <p>Email: <strong>johndoe@example.com</strong></p>
-                </div>
-
-
-                <!-- FORM -->
-                <div>
-                    <h5>Chat</h5>
-                    <form action="" class="login-form"
-                        style="display: flex;flex-direction: column; gap: 1rem; padding: 2rem 0;">
-                        <input type="text" placeholder="Recipient" style="width:100%; padding: 10px 15px; outline:none;
-        background-color: white;border: 2px solid inherit">
-                        <textarea name="" id="4" placeholder="Type your message here." rows="4" style="width:100%; padding: 10px 15px; outline:none;
-        background-color: white;border: 2px solid inherit"></textarea>
-                        <div style="margin-top:1rem;">
-                            <button class="btn btn-primary">Send a message</button>
-                        </div>
-                    </form>
-
-                    <div class="chat-history" style="display: flex;flex-direction: column;gap: 1rem;">
-                        <h5>Chat History</h5>
-                        <div class="chat">
-                            <h6>Jame</h6>
-                            <p>This is a message to you. Keep it</p>
-                        </div>
-                        <div class="chat">
-                            <h6>Jame</h6>
-                            <p>This is a message to you. Keep it</p>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-
-            <div class="person-selector">
-                <button id="john-selector" class="active">John</button>
-                <button id="jane-selector">Jane</button>
-            </div>
-            <div class="chat-container">
-                <h6 class="chat-header"></h6>
-                <div class="chat-messages">
-                    <div class="message blue-bg">
-                        <h6 class="message-sender">John</h6>
-                        <p class="message-test">Hey Jane</p>
-                        <p class="message-time">10:40 am</p>
-                    </div>
-                    <div class="message blue-white">
-                        <h6 class="message-sender">Jane</h6>
-                        <p class="message-test">Yes my G..Hawayu going.</p>
-                        <p class="message-time">10:40 am</p>
-                    </div>
-                </div>
-                <!-- FORM -->
-                <form action="" class="chat-input-form" style="margin-top: 2rem;">
-                    <input type="text" class="chat-input" placeholder="Type here..."
-                        style="background-color: white;padding: 0.9rem 1rem;">
-                    <button type="submit" class="button send-button" style="margin: 1rem 0">Send</button>
-                </form>
-
-                <button type="button" class="clear-chat-button btn btn-secondary">Clear chat</button>
-            </div>
-
-        </div>
+    <h1>Welcome to the Employee Dashboard</h1>
+    <div id="employee-details">
+        <p><strong>Name:</strong> <span id="employee-name"></span></p>
+        <p><strong>Email:</strong> <span id="employee-email"></span></p>
+        <p><strong>Department:</strong> <span id="employee-department"></span></p>
+        <p><strong>Position:</strong> <span id="employee-position"></span></p>
+        <p><strong>Salary:</strong> <span id="employee-salary"></span></p>
     </div>
 
+    <script src="employee.js"></script>
+
     <script>
-        const johnSelector = document.querySelector("#john-selector");
-        const janeSelector = document.querySelector('#jane-selector');
-        const chatHeader = document.querySelector(".chat-header");
-        const chatMessages = document.querySelector('.chat-messages');
-        const chatInputForm = document.querySelector(".chat-input-form")
-        const chatInput = document.querySelector('.chat-input');
-        const clearChatBtn = document.querySelector(".clear-chat-button")
+        // Employee.js: Load Employee Details on Page Load
+document.addEventListener("DOMContentLoaded", () => {
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
-        const chatMessageElement = (message) => `
-                    <div class="message ${message.sender === 'John' ? 'blue-bg' : 'white-bg'}">
-                        <h6 class="message-sender">${message.sender}</h6>
-                        <p class="message-test">${message.text}</p>
-                        <p class="message-time">${message.timestamp}</p>
-                    </div>
-        `;
+    if (!loggedInUser || loggedInUser.role !== "employee") {
+        alert("Access denied. Redirecting to login page.");
+        window.location.href = "login.html"; // Redirect if no valid user
+        return;
+    }
 
-        // To change person sending the message => by default, we know its John
-        let messageSender = "LEAH"
-        const updateMessageSender = (name) => {
-            messageSender = name;
-            chatHeader.innerText = `${messageSender} chatting...`
-            chatInput.placeholder = `Type here ${messageSender}`
-        }
-        janeSelector.onclick = () => updateMessageSender('JANE');
-        johnSelector.onclick = () => updateMessageSender('JOHN')
+    // Display Employee Details
+    document.getElementById("employee-name").textContent = loggedInUser.name || "N/A";
+    document.getElementById("employee-email").textContent = loggedInUser.email || "N/A";
+    document.getElementById("employee-department").textContent = loggedInUser.department || "N/A";
+    document.getElementById("employee-position").textContent = loggedInUser.position || "N/A";
+    document.getElementById("employee-salary").textContent = loggedInUser.salary || "N/A";
+});
 
-        if (name === "JOHN") {
-            johnSelector.classList.add("active")
-            janeSelector.classList.remove("active")
-        }
-        if (name === "JANE") {
-            janeSelector.classList.add("active");
-            johnSelector.classList.remove('active');
-        }
-
-        // Send message function
-        const sendMessage = (e) => {
-            e.preventDefault();
-
-            // Get the timestamp
-            const timestamp = new Date().toLocaleString('en-US', { hour: "numeric", minute: "numeric", hour12: true })
-            const message = {
-                sender: messageSender,
-                text: chatInput.value,
-                timestamp
-            }
-        }
-
-    </script>
-
-    <script src="app.js"></script>
-    <script>
-
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const logoutButton = document.getElementById('logout-button');
-            if (logoutButton) {
-                logoutButton.addEventListener('click', logout);
-            }
-
-            // loadEmployeeDetails();
-        });
-
-
-        // async function loadEmployeeDetails(id) => {
-
-        // }
-
-        document.getElementById('logout-button').addEventListener('click', logout)
-        function logout() {
-            if (confirm("Are you sure you want to logout?")) {
-                // Clear local storage or session data
-                localStorage.removeItem('loggedInUser');
-                // localStorage.removeItem('cart'); // Clear cart data
-
-                // Redirect to login page
-                window.location.href = "login.html";
-            }
-
-        }
-
-
-
-
-        const APP_URL = 'http://localhost:3000';
-        document.addEventListener('DOMContentLoaded', () => {
-            renderEmployeeManagement();
-        })
-
-
-        ///Render employees
-        function renderEmployeeManagement() {
-            const appDiv = document.getElementById('app')
-            appDiv.innerHTML = `
-            <h2>Manage employees</h2>
-            <form id="employee-form">
-                <input type="text" id="name" placeholder="Name">
-                <input type="text" id="department" placeholder="Department"> 
-                <input type="number" id="salary" placeholder="Salary">    
-                <input type="text" id="position" placeholder="Position">    
-                <button>Add employee</button>
-            </form>
-            <div id="employee-list"></div>
-            `
-            document.getElementById('employee-form').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                //Get all the input data from form fields
-                const name = document.getElementById('name').value;
-                const department = document.getElementById('department').value;
-                const salary = document.getElementById('salary').value;
-                const position = document.getElementById('position').value;
-
-                try {
-                    await fetch(`${APP_URL}/employees`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': "application/json" },
-                        body: JSON.stringify({ name, department, salary, position })
-                    });
-                    loadEmployees(); // Refresh list after adding a new record
-                } catch (error) {
-                    console.log(error)
-                }
-
-            })
-
-            loadEmployees() //Load employees on initial render
-        }
-
-        async function loadEmployees() {
-            const response = await fetch(`${APP_URL}/employees`);
-            if (!response.ok) return;
-
-            const employees = await response.json();
-
-            const employeeList = document.getElementById('employee-list');
-            employeeList.innerHTML = '<h3>Employee List</h3>'
-
-
-            //Loop through the employees 
-            employees.forEach((employee) => {
-                employeeList.innerHTML += `
-                    <p>${employee.name} - ${employee.position}</p>
-                `
-            })
-        }
     </script>
 </body>
-
 </html>

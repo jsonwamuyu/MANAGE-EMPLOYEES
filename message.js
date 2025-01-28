@@ -9,7 +9,7 @@ app.use(express.static('public'));
 
 app.get('/users', async (req, res) => {
     try {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/users');
+        const response = await axios.get('https://jsonplaceholder.typicode.com/employees');
         res.json(response.data);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch users' });

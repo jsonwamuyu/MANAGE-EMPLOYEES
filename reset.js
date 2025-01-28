@@ -1,6 +1,6 @@
 const form = document.getElementById('reset-password-form');
 const message = document.getElementById('message');
-const apiUrl = 'http://localhost:3000/users';
+const apiUrl = 'http://localhost:3000/employees';
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
