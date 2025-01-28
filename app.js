@@ -25,6 +25,17 @@ function showError(message) {
   }, 3000);
 }
 
+function showSuccessError(message) {
+  const errorMessage = document.getElementById('success-message');
+  errorMessage.textContent = message;
+  errorMessage.style.display = 'block';
+
+  setTimeout(() => {
+    errorMessage.style.display = 'none';
+  }, 3000);
+}
+
+
 
 // Login Logic
 async function login(event) {
@@ -40,19 +51,16 @@ async function login(event) {
 
   try {
     // Now that we are sure password and email fields are not empty. Fetch all the users from database(LocalStorage or server)
-    const users = await fetchData("users");
+    const users = await fetchData("employees");
     const user = users.find(u => u.email === email && u.password === password);
 
     // If there exist a user with such credentials
     if (user) {
       localStorage.setItem('loggedInUser', JSON.stringify(user));
-      if(user.role === "admin") return window.location.href = "admin.html"
-      if(user.role === "manager") return window.location.href = "manager.html"
+      if (user.role === "admin") return window.location.href = "admin.html"
+      if (user.role === "manager") return window.location.href = "manager.html"
 
-      if(user.role === "employee") {
-        employeeDetails = document.getElementById('employee-details')
-        console.log(user.id, "user id");
-        return window.location.href = "employee.html"}
+      if (user.role === "employee") return window.location.href = "employee.html"
     } else {
       showError("Inavalid email or password.")
     }
@@ -78,14 +86,14 @@ async function signup(event) {
     return;
   }
 
-  const users = await fetchData("users");
+  const users = await fetchData("employees");
   if (users.find(u => u.email === email)) {
     showError("Email already exists");
     return;
   }
 
   const newUser = { email, password, role };
-  await postData("users", newUser);
+  await postData("employees", newUser);
   // alert("Signup successful! Redirecting to login...");
   window.location.href = "login.html";
 }
