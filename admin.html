@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Admin Dashboard</title>
-<<<<<<< HEAD
     <style>
         /* Modal styles */
         .modal {
@@ -91,19 +90,6 @@
             flex-direction: row;
             gap: 1rem;
             margin-bottom: 1rem;
-=======
-    <style>
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
->>>>>>> 13d3f38ef13f667ad60e83a5fd99cbec2aa6c86f
             align-items: center;
             z-index: 1000;
         }
@@ -131,7 +117,6 @@
             flex-direction: column;
             gap: 1rem;
         }
-<<<<<<< HEAD
 
         @media screen and (min-width:600px) {
 
@@ -162,8 +147,6 @@
                 /* grid-template-columns: 2fr 2fr 1fr 1fr; */
             }
         }
-=======
->>>>>>> 13d3f38ef13f667ad60e83a5fd99cbec2aa6c86f
     </style>
 
 
@@ -171,12 +154,8 @@
 
 <body>
     <div class="container">
-<<<<<<< HEAD
         <div class="admin-nav"
             style="display: flex; flex-direction: row-reverse;justify-content: space-between;padding-top: 2rem;">
-=======
-        <div class="admin-nav">
->>>>>>> 13d3f38ef13f667ad60e83a5fd99cbec2aa6c86f
             <div>
                 <button id="logout-button">Logout</button>
             </div>
@@ -188,7 +167,7 @@
         <div id="product-management">
             <h4>Add an Employee</h4>
             <div class="success-message" id="success-message" style="color: green;padding-top: 1rem;;"></div>
-            
+
             <div class="error-message" id="error-message" style="color: red;padding-top: 1rem;;"></div>
             <form id="product-form" class="product-form">
                 <input type="text" id="name" name="name" placeholder="Employee name">
@@ -236,11 +215,8 @@
             document.getElementById('product-form').addEventListener('submit', addEmployee);
             loadEmployees();
 
-<<<<<<< HEAD
             document.getElementById('logout-button').addEventListener('click', logout)
 
-=======
->>>>>>> 13d3f38ef13f667ad60e83a5fd99cbec2aa6c86f
             document.getElementById('edit-form').addEventListener('submit', async (e) => {
                 e.preventDefault();
 
@@ -320,12 +296,9 @@
             const newId = employees.length ? employees[employees.length - 1].id + 1 : 1;
 
             await postData('employees', { id: newId, name, salary, department, position });
-<<<<<<< HEAD
-            
+
             showSuccessMessage("Employee added successfully!")
-=======
-            alert('Employee added successfully!');
->>>>>>> 13d3f38ef13f667ad60e83a5fd99cbec2aa6c86f
+            document.getElementById("product-form").reset();
             loadEmployees();
         }
 
@@ -347,7 +320,6 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
-<<<<<<< HEAD
         }
 
         function logout() {
@@ -361,32 +333,28 @@
 
 
         function showError(message) {
-  const errorMessage = document.getElementById('error-message');
-  errorMessage.textContent = message;
-  errorMessage.style.display = 'block';
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
 
-  setTimeout(() => {
-    errorMessage.style.display = 'none';
-  }, 3000);
-}
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 3000);
+        }
 
-function showSuccessMessage(message) {
-  const errorMessage = document.getElementById('success-message');
-  errorMessage.textContent = message;
-  errorMessage.style.display = 'block';
+        function showSuccessMessage(message) {
+            const errorMessage = document.getElementById('success-message');
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
 
-  setTimeout(() => {
-    errorMessage.style.display = 'none';
-  }, 3000);
-}
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 3000);
+        }
 
 
     </script>
     <script src="app.js"></script>
-=======
-        }
-    </script>
->>>>>>> 13d3f38ef13f667ad60e83a5fd99cbec2aa6c86f
 </body>
 
 </html>
