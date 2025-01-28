@@ -103,6 +103,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('product-form').addEventListener('submit', addEmployee);
+            document.getElementById('logout-button').addEventListener('click', logout);
             loadEmployees();
 
             document.getElementById('edit-form').addEventListener('submit', async (e) => {
@@ -182,6 +183,14 @@
                 await fetch(`http://localhost:3000/employees/${id}`, { method: 'DELETE' });
                 alert('Employee deleted successfully!');
                 loadEmployees();
+            }
+        }
+
+        function logout() {
+            if (confirm("Are you sure you want to logout?")) {
+                localStorage.clear();
+                sessionStorage.clear();
+                window.location.href = "login.html";
             }
         }
 

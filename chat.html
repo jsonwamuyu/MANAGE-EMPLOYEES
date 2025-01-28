@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatroom</title>
+    <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+    <div id="welcome-page" class="page">
+        <h1>Welcome to Chatroom</h1>
+        <div>
+            <input type="text" id="sender-username" placeholder="Enter sender username" />
+            <button id="sender-join-button">Join as Sender</button>
+        </div>
+        <div>
+            <input type="text" id="receiver-username" placeholder="Enter receiver username" />
+            <button id="receiver-join-button">Join as Receiver</button>
+        </div>
+    </div>
+
+    <div id="chatroom-page" class="page hidden">
+        <div class="chatroom-header">
+            <h2 id="chatroom-title">Chatroom</h2>
+            <button id="exit-button">Exit</button>
+        </div>
+        <div id="chat-box" class="chat-box">
+        </div>
+        <div class="chat-input">
+            <h3>Sender</h3>
+            <input type="text" id="sender-message" placeholder="Sender: Type your message" />
+            <button id="send-sender-message">Send</button>
+        </div>
+        <div class="chat-input">
+            <h3>Receiver</h3>
+            <input type="text" id="receiver-message" placeholder="Receiver: Type your message" />
+            <button id="send-receiver-message">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const senderUsernameInput = document.getElementById('sender-username');
+        const receiverUsernameInput = document.getElementById('receiver-username');
+        const senderJoinButton = document.getElementById('sender-join-button');
+        const receiverJoinButton = document.getElementById('receiver-join-button');
+        const welcomePage = document.getElementById('welcome-page');
+        const chatroomPage = document.getElementById('chatroom-page');
+        const chatBox = document.getElementById('chat-box');
+        const senderMessageInput = document.getElementById('sender-message');
+        const receiverMessageInput = document.getElementById('receiver-message');
+        const sendSenderMessageButton = document.getElementById('send-sender-message');
+        const sendReceiverMessageButton = document.getElementById('send-receiver-message');
+        const exitButton = document.getElementById('exit-button');
+
+        let senderUsername = '';
+        let receiverUsername = '';
+        senderJoinButton.addEventListener('click', () => {
+            if (senderUsernameInput.value.trim() === '') {
+                alert('Please enter a sender username.');
+                return;
+            }
+            senderUsername = senderUsernameInput.value.trim();
+            checkBothUsersJoined();
+        });
+        receiverJoinButton.addEventListener('click', () => {
+            if (receiverUsernameInput.value.trim() === '') {
+                alert('Please enter a receiver username.');
+                return;
+            }
+            receiverUsername = receiverUsernameInput.value.trim();
+            checkBothUsersJoined();
+        });
+        function checkBothUsersJoined() {
+            if (senderUsername && receiverUsername) {
+                welcomePage.classList.add('hidden');
+                chatroomPage.classList.remove('hidden');
+                document.getElementById(
+                    'chatroom-title'
+                ).textContent = `Chatroom - ${senderUsername} & ${receiverUsername}`;
+            }
+        }
+        sendSenderMessageButton.addEventListener('click', () => {
+            const message = senderMessageInput.value.trim();
+            if (message === '') {
+                alert('Please type a message.');
+                return;
+            }
+            addMessage(senderUsername, receiverUsername, message, true); 
+            senderMessageInput.value = '';
+        });
+
+        sendReceiverMessageButton.addEventListener('click', () => {
+            const message = receiverMessageInput.value.trim();
+            if (message === '') {
+                alert('Please type a message.');
+                return;
+            }
+            addMessage(receiverUsername, senderUsername, message, false); 
+            receiverMessageInput.value = '';
+        });
+
+        exitButton.addEventListener('click', () => {
+            chatroomPage.classList.add('hidden');
+            welcomePage.classList.remove('hidden');
+            senderUsernameInput.value = '';
+            receiverUsernameInput.value = '';
+            chatBox.innerHTML = ''; 
+            senderUsername = '';
+            receiverUsername = '';
+        });
+        function addMessage(sender, receiver, message, isSender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', isSender ? 'sender' : 'receiver');
+            messageElement.innerHTML = `<strong>${sender} (to ${receiver}):</strong> ${message}`;
+            chatBox.appendChild(messageElement);
+            chatBox.scrollTop = chatBox.scrollHeight; 
+        }
+    </script>
+</body>
+</html>

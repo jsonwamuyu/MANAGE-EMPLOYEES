@@ -38,13 +38,31 @@
       "email": "mike@gmail.com",
       "password": "1234",
       "role": "employee"
+    },
+    {
+      "id": "cc19",
+      "email": "manger@gmail.com",
+      "password": "12345",
+      "role": "manager"
+    },
+    {
+      "id": "e207",
+      "email": "employee@gmail.com",
+      "password": "12345",
+      "role": "employee"
+    },
+    {
+      "id": "2607",
+      "email": "empl@gmail.com",
+      "password": "12345",
+      "role": "employee"
     }
   ],
   "employees": [
     {
       "name": "Jane Doe",
       "department": "Accounts",
-      "position": "Junior level",
+      "position": "Senior level",
       "salary": 200000,
       "id": "1"
     },
@@ -68,6 +86,34 @@
       "salary": 200000,
       "department": "Accounts",
       "position": "Junior level"
+    },
+    {
+      "id": "311",
+      "name": "John Doe",
+      "salary": 2345678,
+      "department": "ICT",
+      "position": "chairman"
+    },
+    {
+      "id": "3111",
+      "name": "Neymar",
+      "salary": 12356765432,
+      "department": "Football",
+      "position": "Striker"
+    },
+    {
+      "id": "311111",
+      "name": "Stallon",
+      "salary": 2000,
+      "department": "Movie",
+      "position": "Sterling"
+    },
+    {
+      "id": "3111111",
+      "name": "",
+      "salary": null,
+      "department": "",
+      "position": ""
     }
   ]
 }
