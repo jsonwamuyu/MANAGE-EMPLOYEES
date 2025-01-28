@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div>
+                <h4>Chat</h4>
+            </div>
+        </div>
+    </div>
+    <script>
+        const API_URL = 'http://localhost:300';
+        document.addEventListener("DOMContentLoaded", () => {
+            renderMessaging()
+        })
+        function renderMessaging() {
+            const appDiv = document.getElementById('app');
+            appDiv.innerHTML = `
+            <h2>Messaging System</h2>
+            <form id="message-form">
+                <textarea id="message-content" placeholder="Type your message here..." required></textarea>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+            <div id="message-list"></div>
+            `;
+            document.getElementById('message-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                // Get form input
+                const message = document.getElementById('message-content').value;
+
+                try {
+                    await fetch(`${API_URL}/messages`, {//use messages endpoint to add messages
+                        method: "POST",
+                        headers: { 'Content-Type': "application/json" },
+                        body: JSON.stringify({ message })
+                    });
+
+
+                    // Logic to add message goes here
+
+                    // Clear input after sending
+                    document.getElementById('message').value = "";
+                    loadMessages() //refresh after adding message
+                } catch (error) {
+                    console.log(error);
+                }
+            });
+
+            loadMessages()
+        }
+
+        async function loadMessages(){
+            const resp = fetch(`${API_URL}/messages`);
+            if(!resp.ok) return;
+
+            const messages = await resp.json();
+            const messageList = document.getElementById('message-list');
+            messageList.innerHTML = '<h3>Message History</h3>'
+            //Loop through the messages
+            messages.forEach(msg => {
+                messageList.innerHTML+= `<p>${msg.message}</p>`
+            });
+        }
+
+    </script>
+</body>
+
+</html>
