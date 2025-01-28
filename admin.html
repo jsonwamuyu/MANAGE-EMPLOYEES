@@ -5,97 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Admin Dashboard</title>
-
     <style>
-        .para-clamp {
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            line-clamp: 1;
-            /* Number of lines to show */
-            -webkit-box-orient: vertical;
-        }
-
-        .heading-clamp {
-
-
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-
-            /* overflow: hidden;
-            display: -moz-box;
-            -webkit-line-clamp: 1;
-            line-clamp: 1;
-            -webkit-box-orient: vertical; */
-        }
-
-        form input,
-        textarea {
-            padding: 1rem 2rem;
-            background-color: white;
-            border: 2px solid inherit;
-            outline: none;
-        }
-
-        .product-form {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-            margin-top: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .admin-logo {
-            display: flex;
-            flex-direction: row;
-            gap: 1rem;
-            margin-bottom: 1rem;
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
             align-items: center;
+            z-index: 1000;
         }
 
-        .product-list {
-            display: grid;
-            grid-template-columns: 1fr;
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 400px;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal form {
+            display: flex;
+            flex-direction: column;
             gap: 1rem;
-        }
-
-        @media screen and (min-width:600px) {
-
-            #product-form {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .admin-logo {
-                flex-direction: row;
-            }
-        }
-
-        @media screen and (min-width: 769px) {
-            .product-list {
-                grid-template-columns: 2fr 1fr;
-            }
-        }
-
-        @media screen and (min-width:900px) {
-            .product-list {
-                grid-template-columns: 2fr 1fr 2fr;
-            }
-        }
-
-        @media screen and (min-width:1024px) {
-            .product-list {
-                background-color: inherit;
-                /* grid-template-columns: 2fr 2fr 1fr 1fr; */
-            }
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="admin-nav"
-            style="display: flex;flex-direction: row-reverse; justify-content: space-between;width: 100%; align-items: center;">
+        <div class="admin-nav">
             <div>
                 <button id="logout-button">Logout</button>
             </div>
@@ -104,77 +57,110 @@
             </div>
         </div>
 
-
-
         <div id="product-management">
             <h4>Add an Employee</h4>
             <form id="product-form" class="product-form">
                 <input type="text" id="name" name="name" placeholder="Employee name">
-
                 <input type="text" id="department" name="department" placeholder="Department">
-
                 <input id="position" name="position" placeholder="Position">
-
                 <input type="number" id="salary" name="salary" placeholder="Salary">
                 <div>
-
                     <button type="submit">Add Employee</button>
-
                 </div>
             </form>
-
-
         </div>
 
-        <div class="display-products" style="margin-top: 5rem; margin-bottom: 2rem;">
+        <div class="display-products">
             <h3>Employees List</h3>
-            <ul id="employees-list" class="product-list">
-                <!-- Display products here -->
-            </ul>
+            <ul id="employees-list" class="product-list"></ul>
         </div>
     </div>
-    <script src="app.js"></script>
+
+    <!-- Edit Employee Modal -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <h3>Edit Employee</h3>
+            <form id="edit-form">
+                <input type="hidden" id="edit-id">
+                <label for="edit-name">Name:</label>
+                <input type="text" id="edit-name" name="name" required>
+
+                <label for="edit-salary">Salary:</label>
+                <input type="number" id="edit-salary" name="salary" required>
+
+                <label for="edit-department">Department:</label>
+                <input type="text" id="edit-department" name="department" required>
+
+                <label for="edit-position">Position:</label>
+                <input type="text" id="edit-position" name="position" required>
+
+                <button type="submit">Update Employee</button>
+            </form>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const logoutButton = document.getElementById('logout-button');
-            if (logoutButton) {
-                logoutButton.addEventListener('click', logout);
-            }
-
-            loadEmployees();
             document.getElementById('product-form').addEventListener('submit', addEmployee);
+            loadEmployees();
+
+            document.getElementById('edit-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const id = document.getElementById('edit-id').value;
+                const name = document.getElementById('edit-name').value;
+                const salary = parseFloat(document.getElementById('edit-salary').value);
+                const department = document.getElementById('edit-department').value;
+                const position = document.getElementById('edit-position').value;
+
+                await fetch(`http://localhost:3000/employees/${id}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, salary, department, position })
+                });
+
+                alert('Employee updated successfully!');
+                closeModal();
+                loadEmployees();
+            });
         });
 
+        function openModal(employee) {
+            document.getElementById('edit-id').value = employee.id;
+            document.getElementById('edit-name').value = employee.name;
+            document.getElementById('edit-salary').value = employee.salary;
+            document.getElementById('edit-department').value = employee.department;
+            document.getElementById('edit-position').value = employee.position;
+
+            document.getElementById('edit-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('edit-modal').style.display = 'none';
+        }
 
         async function loadEmployees() {
             const employees = await fetchData('employees');
-            console.log(employees)
             const employeeList = document.getElementById('employees-list');
-            console.log(employeeList)
             employeeList.innerHTML = '';
-            employees.forEach(employee => {
 
-                console.log(employee.name, "Employee");
+            employees.forEach(employee => {
                 const li = document.createElement('li');
                 li.innerHTML = `
-                <div style="display:flex; flex-direction:column; gap:1rem; border: 2px solid #f8f9fa;
-                 border-radius:1rem;padding:1rem;">
-                    <p class="heading-clamp"> Name:<strong>${employee.name}</strong></p>
-                    <p class="para-clamp">Department: ${employee.department}</p>
-                    <p class="para-clamp">Position: ${employee.position}</p>
-                    <p>Salary: $${employee.salary} </p>
-                    
-                    <div style="display: flex; flex-direction:row; gap:0.5rem; justify-content:space-between; align-items:center">
-                    <button onclick="editEmployee(${employee.id})"><ion-icon name="create-outline"></ion-icon></button>
-                    <button onclick="deleteEmployee(${employee.id})"><ion-icon name="trash-outline"></ion-icon></button>
+                    <div style="border: 2px solid #f8f9fa; border-radius: 1rem; padding: 1rem;">
+                        <p><strong>Name:</strong> ${employee.name}</p>
+                        <p><strong>Department:</strong> ${employee.department}</p>
+                        <p><strong>Position:</strong> ${employee.position}</p>
+                        <p><strong>Salary:</strong> $${employee.salary}</p>
+                        <button onclick='openModal(${JSON.stringify(employee)})'>Edit</button>
+                        <button onclick="deleteEmployee(${employee.id})">Delete</button>
                     </div>
-                </div>
                 `;
                 employeeList.appendChild(li);
             });
         }
 
-        
         async function addEmployee(event) {
             event.preventDefault();
 
@@ -186,37 +172,12 @@
             const employees = await fetchData('employees');
             const newId = employees.length ? employees[employees.length - 1].id + 1 : 1;
 
-            await postData('employees', { id: newId, name, salary, department, position })
+            await postData('employees', { id: newId, name, salary, department, position });
             alert('Employee added successfully!');
-
             loadEmployees();
         }
 
-        async function editEmployee(id) {
-            console.log("Edit clicked")
-            const newName = prompt('Edit employee name');
-
-            const newSalary = prompt('Enter new employee salary');
-            const newDepartment = prompt("Enter new employee department")
-
-            const newPosition = prompt('Enter new employee position');
-
-            console.log({newName, newSalary, newPosition, newDepartment})
-
-            if (newName && newSalary && newDepartment && newPosition) {
-                await fetch(`http://localhost:3000/employees/${id}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name: newName, salary: parseFloat(newSalary), department: newDepartment, position: newPosition })
-                });
-                alert('Employees details updated successfully!');
-                loadEmployees();
-            }
-
-        }
-
         async function deleteEmployee(id) {
-            console.log("Delete clicked")
             if (confirm('Are you sure you want to delete this employee?')) {
                 await fetch(`http://localhost:3000/employees/${id}`, { method: 'DELETE' });
                 alert('Employee deleted successfully!');
@@ -224,20 +185,18 @@
             }
         }
 
-        function logout() {
-            if (confirm("Are you sure you want to logout?")) {
-                // Clear local storage or session data
-                localStorage.removeItem('loggedInUser');
-                localStorage.removeItem('cart'); // Clear cart data
+        function fetchData(endpoint) {
+            return fetch(`http://localhost:3000/${endpoint}`).then(res => res.json());
+        }
 
-                // Redirect to login page
-                window.location.href = "login.html";
-            }
+        function postData(endpoint, data) {
+            return fetch(`http://localhost:3000/${endpoint}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
         }
     </script>
-
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>

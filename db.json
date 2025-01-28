@@ -42,7 +42,7 @@
   ],
   "employees": [
     {
-      "name": "John Doe",
+      "name": "Jane Doe",
       "department": "Accounts",
       "position": "Junior level",
       "salary": 200000,
@@ -50,10 +50,10 @@
     },
     {
       "id": "2",
-      "name": "Nancy Leo",
-      "salary": 233333,
-      "department": "Accounts",
-      "position": "Secretary"
+      "name": "Samwel",
+      "salary": 2000,
+      "department": "ICT",
+      "position": "chairman"
     },
     {
       "id": "3",
@@ -61,6 +61,13 @@
       "salary": 300000,
       "department": "ACCOUNTS",
       "position": "Virtual Assistant"
+    },
+    {
+      "id": "31",
+      "name": "Samwel james",
+      "salary": 200000,
+      "department": "Accounts",
+      "position": "Junior level"
     }
   ]
 }
