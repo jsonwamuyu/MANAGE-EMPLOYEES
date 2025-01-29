@@ -36,14 +36,16 @@
 </head>
 <body>
     <div class="login-container">
-        <h1 style="margin: 2rem;">Login</h1>
+        <h1 style="margin: 2rem;" class="login-title" data-cy="login-title">Login</h1>
+        <!-- <h1 style="margin: 2rem;" class="login-title" data.cy="login-title">Login</h1> -->
+
         <div class="error-message" id="error-message"></div>
         <form id="login-form">
-            <input type="email" id="email" name="email" placeholder="Email Address" >
+            <input type="email" id="email" name="email" placeholder="Email Address" data-cy="email-input" >
 
-            <input type="password" id="password" name="password"  placeholder="Password">
+            <input type="password" id="password" name="password"  placeholder="Password" data-cy="password-input">
 
-            <button type="submit" style="margin-top: 1rem;">Login</button>
+            <button type="submit" style="margin-top: 1rem;" data-cy="login-btn">Login</button>
         </form>
         <div style="display:flex; flex-direction:row; gap:1rem; justify-content:space-between; align-items:center">
         <p style="font-size: 0.9rem; margin-top: 2rem;"><a style=" color: var(--primary-color);" href="forgot-password.html">Forgot Password</a></p>

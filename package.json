@@ -6,6 +6,7 @@
     "test": "jest"
   },
   "devDependencies": {
+    "cypress": "^14.0.1",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0"
   },

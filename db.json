@@ -35,6 +35,20 @@
       "salary": 60000,
       "department": "ACCOUNTS",
       "position": "Virtual Assistant"
+    },
+    {
+      "id": "31",
+      "name": "JOHNSON WAMUYU",
+      "salary": 200000,
+      "department": "ACCOUNTS",
+      "position": "Virtual Assistant"
+    },
+    {
+      "id": "311",
+      "name": "JOHNSON MUCHIRI WAMUYU",
+      "salary": 20000,
+      "department": "ICT",
+      "position": "Data Analyst Chrome Partners Ltd"
     }
   ]
 }
