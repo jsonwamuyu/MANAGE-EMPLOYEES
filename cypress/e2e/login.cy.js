@@ -37,9 +37,31 @@ describe("Test login functionality spec", () => {
     cy.intercept("GET", "/app/api", {
       statusCode: 200,
       body: { message: "Login successful" },
-    }).as('loginStub');
+    }).as("loginStub");
 
     // type into the form input and click login button
+    cy.get('[data-cy="email-input"]').type("johndoe@gmail.com");
+    cy.get('[data-cy="password-input"]').type("admin123");
+    cy.get('[data-cy="login-btn"]').click();
+
+    cy.wait("@loginStub").then((intercept) => {
+      expect(intercept.response.statusCode).to.eq(200);
+      expect(intercept.response.body.message).to.eq("Login successful");
+    });
+
+    //
+    cy.contains("Login successful").should("be.visible");
+  });
+
+  it("Should call the login button", () => {
+    // spy on the handleLogin function
+    cy.window().then((win) => {
+      cy.spy(win, handleLogin).as("loginSpy");
+    });
+    // Fill out the login form
+    cy.get('[data-cy="email-input"]').type("admin@example.com");
+    cy.get('[dta-cy="password-input"]').type("admin123");
+    cy.get('[data-cy="login-button"]').click();
   });
 
   // it("submit button",()=>{
