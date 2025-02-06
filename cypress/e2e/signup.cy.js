@@ -25,3 +25,29 @@ describe("Test signup page", () => {
 
   cy.contains("Signup successful").should("be.visible");
 });
+
+// Add login spy
+//  We want to make sure the handleLogin
+// function is called when the user clicks the login button.
+
+describe("Test login page", () => {
+  beforeEach(() => {
+    cy.visit("login.html");
+  });
+
+  it("Should call the login function", () => {
+    //spy on the handleLogin function
+    cy.window.then((win) => {
+      cy.spy(win, "handleLogin").as("loginSpy");
+    });
+
+    // Fill out the login form and click login button
+    cy.get('[data-cy="email"]').type("admin@example.com");
+    cy.get('[data-cy="password"]').type("admin123");
+    cy.get('[data-cy="login-button"]').click();
+
+    // Check if login function was called
+
+    cy.get("@loginSpy").should("have.been.calledOnce");
+  });
+});
